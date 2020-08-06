@@ -10,5 +10,5 @@ setup(
     author_email='dominik.schneider@wsu.edu',
     license='MIT',
     packages=['cppcpyutils'],
-    install_requires=["numpy","matplotlib","mpl_toolkits","pandas"],
+    install_requires=["numpy","matplotlib","pandas"],
     zip_safe=False)
