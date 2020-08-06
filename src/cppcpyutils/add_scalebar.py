@@ -9,6 +9,23 @@ def add_scalebar(pseudoimg,
                  barlocation='lower center',
                  fontprops=None,
                  scalebar=None):
+    '''
+    Arguments:
+        pseudoimg: a matplotlib figure
+        pixelresolution: physical size represented by a pixel in mm
+        barwidth: size of the scale bar in mm
+        barlabel: text for the bar label
+        barlocation: position of scale bar in figure, optional
+        fontprops: font properties as specified by matplotlib.font_manager, optional
+        scalebar: a preestablished scaled bar, optional
+
+    Returns:
+        matplotlib figure
+
+    '''
+
+
+
     if fontprops is None:
         fontprops = fm.FontProperties(size=8, weight='bold')
 
