@@ -1,11 +1,13 @@
 import cv2
+import numpy as np
 
-def greenness_index:
+
+def greenness_index(img):
     '''
     compute greenness index
     Inputs:
         img: rgb image, numpy array
-    Returns:
+    Outputs:
         grayscale, numpy array
     '''
 
