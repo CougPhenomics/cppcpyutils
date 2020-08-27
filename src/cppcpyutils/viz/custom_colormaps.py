@@ -1,15 +1,13 @@
 import numpy as np
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 from matplotlib import cm
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
+from matplotlib.colors import ListedColormap
 
 
 def get_colors(style='imagingwin'):
     '''
     Input:
         style - define custom colors. Default is "imagingwin".
-    Output:
+    Returns:
         an array of colors
     '''
 
@@ -21,9 +19,13 @@ def get_colors(style='imagingwin'):
         black = np.array([0, 0, 0, 1])
         newcolors[:10,:] = black
 
-    if style == 'hue':
+    elif style == 'hue':
         hsv = cm.get_cmap('hsv', 256)
-        newcolors = hsv[0:127]
+        hsvcolors = hsv(np.linspace(0, 1, 256))
+        newcolors = hsvcolors[0:127]
+
+    else:
+        raise ValueError('that color map is not supported')
 
     return newcolors
 
@@ -36,7 +38,7 @@ def get_cmap(style='imagingwin'):
         a colormap for use with matplotlib
     '''
 
-    newcolors = get_colors(style)
-    newcmp = ListedColormap(newcolors)
+    cmapcolors = get_colors(style)
+    newcmp = ListedColormap(cmapcolors)
 
     return newcmp
