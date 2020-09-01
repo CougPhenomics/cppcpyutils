@@ -7,7 +7,7 @@ import numpy as np
 
 
 def copy_metadata(args):
-    '''Copy metadata from each image so it can be used for each ROI
+    '''Copy metadata for each image so it can be used for each ROI
     Inputs:
         args: commandline info from running the workflow
     Returns:
@@ -59,6 +59,10 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
     final_mask = np.zeros(shape=np.shape(img)[0:2], dtype='uint8')
 
+    # Compute greenness
+    if gi:
+        gi = cppc.util.greenness_index(img=img, mask=final_mask+1)
+
     for i, rc_i in enumerate(rc):
         rh_i = rh[i]
 
@@ -96,7 +100,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
             final_mask = pcv.image_add(final_mask, plant_mask)
 
-            if gi is not False:
+            if gi:
                 # Save greenness for individual ROI
                 grnindex = cppc.util.mean(gi, plant_mask)
                 grnindexstd = cppc.util.std(gi, plant_mask)

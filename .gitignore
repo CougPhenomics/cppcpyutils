@@ -47,3 +47,5 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
+.Rproj.user
+setup.txt
