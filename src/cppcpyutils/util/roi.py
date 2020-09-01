@@ -38,6 +38,18 @@ def copy_metadata(args):
     return args
 
 
+def write_output(args, i):
+    # Here I will name the results file with the ROI ID combined with the original result filename
+    basename, ext = os.path.splitext(args.result)
+    filename = basename + "-roi" + str(i) + ext
+    # Save the existing metadata to the new file
+    with open(filename, "w") as r:
+        json.dump(args.metadata, r)
+    pcv.print_results(filename=filename)
+    # The results are saved, now clear out the observations so the next loop adds new ones for the next plant
+    pcv.outputs.clear()
+
+
 def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hist=True, hue=False):
     '''Analyze each ROI separately and store results
     Inputs:
@@ -61,7 +73,10 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
     # Compute greenness
     if gi:
-        gi = cppc.util.greenness_index(img=img, mask=final_mask+1)
+        img_gi = cppc.util.greenness_index(img=img, mask=final_mask+1)
+
+    if hue:
+        img_h = pcv.rgb2gray_hsv(img, 'h')
 
     for i, rc_i in enumerate(rc):
         rh_i = rh[i]
@@ -102,8 +117,8 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
             if gi:
                 # Save greenness for individual ROI
-                grnindex = cppc.util.mean(gi, plant_mask)
-                grnindexstd = cppc.util.std(gi, plant_mask)
+                grnindex = cppc.util.mean(img_gi, plant_mask)
+                grnindexstd = cppc.util.std(img_gi, plant_mask)
                 pcv.outputs.add_observation(
                     variable='greenness_index',
                     trait='mean normalized greenness index',
@@ -123,11 +138,11 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
                     label='/1')
 
             # Analyze all colors
-            colorhist = pcv.analyze_color(img, plant_mask, 'all')
-            img_h = pcv.rgb2gray_hsv(img, 'h')
+            if hist:
+                colorhist = pcv.analyze_color(img, plant_mask, 'all')
 
-            # Analyze the shape of the current plant
-            shape_img = pcv.analyze_object(img, plant_object, plant_mask)
+            # Analyze the shape of the current plant (always do this even if shape is False so you can get plant_area)
+            img_shape = pcv.analyze_object(img, plant_object, plant_mask)
             plant_area = pcv.outputs.observations['area']['value'] * cppc.pixelresolution**2
             pcv.outputs.add_observation(
                 variable='plantarea',
@@ -141,21 +156,13 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
         # At this point we have observations for one plant
         # We can write these out to a unique results file
-        # Here I will name the results file with the ROI ID combined with the original result filename
-        basename, ext = os.path.splitext(args.result)
-        filename = basename + "-roi" + str(i) + ext
-        # Save the existing metadata to the new file
-        with open(filename, "w") as r:
-            json.dump(args.metadata, r)
-        pcv.print_results(filename=filename)
-        # The results are saved, now clear out the observations so the next loop adds new ones for the next plant
-        pcv.outputs.clear()
+        write_output(args, i)
 
         if args.writeimg and obj_area != 0:
             if shape:
                 imgdir = os.path.join(args.outdir, 'shape_images', args.plantbarcode)
                 os.makedirs(imgdir, exist_ok=True)
-                pcv.print_image(shape_img, os.path.join(imgdir, args.imagename + '-roi' + str(i) + '-shape.png'))
+                pcv.print_image(img_shape, os.path.join(imgdir, args.imagename + '-roi' + str(i) + '-shape.png'))
 
             if hist:
                 imgdir = os.path.join(args.outdir, 'colorhist_images', args.plantbarcode)
@@ -176,37 +183,49 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
                 # save hue false color image for entire tray but only 1 plant
                 imgdir = os.path.join(args.outdir, 'hue_images')
                 os.makedirs(imgdir, exist_ok=True)
-                hue_img = pcv.visualize.pseudocolor(img_h*2, obj=None,
+                fig_hue = pcv.visualize.pseudocolor(img_h*2, obj=None,
                                                     mask=plant_mask,
                                                     cmap=cppc.viz.get_cmap('hue'),
                                                     axes=False,
                                                     min_value=0, max_value=179,
                                                     background='black', obj_padding=0)
-                hue_img = cppc.viz.add_scalebar(hue_img,
+                fig_hue = cppc.viz.add_scalebar(fig_hue,
                                     pixelresolution=cppc.pixelresolution,
                                     barwidth=10,
                                     barlabel='1 cm',
                                     barlocation='lower left')
-                hue_img.set_size_inches(6, 6, forward=False)
-                hue_img.savefig(os.path.join(imgdir, args.imagename + '-roi' + str(i) + '-hue.png'),
+                fig_hue.set_size_inches(6, 6, forward=False)
+                fig_hue.savefig(os.path.join(imgdir, args.imagename + '-roi' + str(i) + '-hue.png'),
                                 bbox_inches='tight',
                                 dpi=300)
-                hue_img.clf()
+                fig_hue.clf()
 
-            if gi is not False:
+            if gi:
                 # save grnness image of entire tray but only 1 plant
                 imgdir = os.path.join(args.outdir, 'grnindex_images')
                 os.makedirs(imgdir, exist_ok=True)
-                gi_img = pcv.visualize.pseudocolor(
-                    gi, obj=None, mask=plant_mask, cmap='viridis', axes=False, min_value=0.3, max_value=0.6, background='black', obj_padding=0)
-                gi_img = cppc.viz.add_scalebar(gi_img,
-                                    pixelresolution=cppc.pixelresolution,
-                                    barwidth=10,
-                                    barlabel='1 cm',
-                                    barlocation='lower left')
-                gi_img.set_size_inches(6, 6, forward=False)
-                gi_img.savefig(os.path.join(imgdir, args.imagename + '-roi' + str(i) + '-greenness.png'), bbox_inches='tight', dpi=300)
-                gi_img.clf()
+                fig_gi = pcv.visualize.pseudocolor(img_gi,
+                                                   obj=None,
+                                                   mask=plant_mask,
+                                                   cmap='viridis',
+                                                   axes=False,
+                                                   min_value=0.3,
+                                                   max_value=0.6,
+                                                   background='black',
+                                                   obj_padding=0)
+                fig_gi = cppc.viz.add_scalebar(
+                    fig_gi,
+                    pixelresolution=cppc.pixelresolution,
+                    barwidth=10,
+                    barlabel='1 cm',
+                    barlocation='lower left')
+                fig_gi.set_size_inches(6, 6, forward=False)
+                fig_gi.savefig(os.path.join(
+                    imgdir,
+                    args.imagename + '-roi' + str(i) + '-greenness.png'),
+                               bbox_inches='tight',
+                               dpi=300)
+                fig_gi.clf()
 
         # end roi loop
     return final_mask
