@@ -1,6 +1,6 @@
 import pytest
-from cppcpyutils.data.import_snapshots import find_images
-from cppcpyutils.data.import_snapshots import get_imagemetadata
+from cppcpyutils.io import find_images
+from cppcpyutils.io import get_imagemetadata
 from pandas.testing import assert_frame_equal
 from pandas import DataFrame
 from pandas import Timestamp

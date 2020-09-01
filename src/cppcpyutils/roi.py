@@ -73,7 +73,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
     # Compute greenness
     if gi:
-        img_gi = cppc.util.greenness_index(img=img, mask=final_mask+1)
+        img_gi = cppc.compute.greenness_index(img=img, mask=final_mask+1)
 
     if hue:
         img_h = pcv.rgb2gray_hsv(img, 'h')
@@ -117,8 +117,8 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
             if gi:
                 # Save greenness for individual ROI
-                grnindex = cppc.util.mean(img_gi, plant_mask)
-                grnindexstd = cppc.util.std(img_gi, plant_mask)
+                grnindex = cppc.utils.mean(img_gi, plant_mask)
+                grnindexstd = cppc.utils.std(img_gi, plant_mask)
                 pcv.outputs.add_observation(
                     variable='greenness_index',
                     trait='mean normalized greenness index',
