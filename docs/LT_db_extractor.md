@@ -2,10 +2,6 @@
 
 Allow a user to connect to a LemnaTec database and download snapshots without the requirement to use LemnaTec software.
 
-## Installation
-
-`pip install cppcpyutils`
-
 ## Instructions
 
 1. Create a database.config file and adjust parameters in the JSON file to suit your set-up.

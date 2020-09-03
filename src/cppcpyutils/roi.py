@@ -140,6 +140,8 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
             # Analyze all colors
             if hist:
                 colorhist = pcv.analyze_color(img, plant_mask, 'all')
+            elif hue:
+                _ = pcv.analyze_color(img, plant_mask, 'hsv')
 
             # Analyze the shape of the current plant (always do this even if shape is False so you can get plant_area)
             img_shape = pcv.analyze_object(img, plant_object, plant_mask)
