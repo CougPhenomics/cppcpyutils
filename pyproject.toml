@@ -7,10 +7,14 @@ module = "cppcpyutils"
 author = "Dominik Schneider"
 author-email = "dominik.schneider@wsu.edu"
 home-page = "https://github.com/CougPhenomics/cppcpyutils"
+description-file = docs/LT_db_extractor.md
 classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
 keywords = 'plant phenotyping bioinformatics'
 requires = [
-    "plantcv <4"
+    "plantcv ~=3.6",
+    "psycopg2",
+    "paramiko",
+    "tqdm"
 ]
 
 [tool.flit.metadata.requires-extra]
@@ -19,4 +23,7 @@ test = [
     "pytest-cov",
 ]
 doc = ["sphinx"]
+
+[tool.flit.scripts]
+LT_db_extractor = "cppcpyutils.LT_db_extractor:main"
 
