@@ -4,7 +4,8 @@ Allow a user to connect to a LemnaTec database and download snapshots without th
 
 ## Instructions
 
-1. Create a database.config file and adjust parameters in the JSON file to suit your set-up.
+### 1. Create a database.config file and adjust parameters in the JSON file to suit your set-up.
+
 A couple things to keep in mind.
 
 - username, password, hostname refer to the server ssh login. If you are running the script on the server, hostname = "localhost"
@@ -33,7 +34,8 @@ A couple things to keep in mind.
 }
 ```
 
-2. Open the terminal and run `LT-db-extractor.py` with `-h` to see available command line arguments.
+### 2. Open the terminal and run `LT-db-extractor.py` with `-h` to see available command line arguments.
+
 ```sh
 (plantcv) C:\Users\dominikschneider\Documents\phenomics>python LT-db-extractor.py -h
 usage: LT-db-extractor.py [-h] -c CONFIG -e EXPER [-l CAMERA]
@@ -70,7 +72,7 @@ optional arguments:
 
 Metadata of each image downloaded will be saved to a CSV.
 
-3. Utilise [PlantCV](https://github.com/danforthcenter/plantcv) to analyse your images!
+### 3. Utilise [PlantCV](https://github.com/danforthcenter/plantcv) to analyse your images!
 
 ## Example
 
