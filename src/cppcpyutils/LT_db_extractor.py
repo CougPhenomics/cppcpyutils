@@ -302,9 +302,14 @@ def main():
 def rotate_image(img, flip_type):
     """Rotate image based on flip code
 
-    :param img: ndarray
-    :param flip_type: int
-    :return img: ndarray
+    Parameters
+    ----------
+        img : ndarray
+        flip_type : int
+
+    Returns
+    -------
+        rotated image : ndarray
     """
     if flip_type == 0:
         img = img
@@ -328,6 +333,7 @@ def rotate_image(img, flip_type):
         img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     return img
+
 
 if __name__ == '__main__':
     main()

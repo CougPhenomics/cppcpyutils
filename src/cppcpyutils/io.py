@@ -7,32 +7,50 @@ import pandas as pd
 
 
 def import_snapshots(snapshotdir, camera='psII'):
-    '''
-    Import snapshots from PSII imaging.
+    """Import snapshots from PSII imaging
 
-    Input:
-        snapshotdir: path to image directory
-        camera: camera label for backwards compatibility (no longer used)
-    Returns:
-        snapshotdf: pandas dataframe with snapshot metadata
-    Details:
-        Export .png into data/<camera> folder from LemnaBase using data-science-tools/LT-db-extractor.py
-    for example: C6-GoldStandard_PSII-20190312T000911-PSII0-15.png
-    '''
+    Parameter
+    ---------
+    snapshotdir : str
+        path to image directory
+    camera : str
+        camera label for backwards compatibility (no longer used)
+
+    Returns
+    -------
+        pandas dataframe with snapshot metadata
+
+    Notes
+    -----
+    Export .png into data/<camera> folder from LemnaBase using the commandline `LT-db-extractor`. file format example: C6-GoldStandard_PSII-20190312T000911-PSII0-15.png
+
+    """
 
     fns = find_images(snapshotdir)
     return get_imagemetadata(fns)
 
 
 def find_images(snapshotdir):
-    '''
-    Input:
-        snapshotdir = directory of .png files
-    Returns:
-        fns = filenames of image files
-    '''
+    """Find png images is specified directory
 
-    # %% Get metadata from .tifs
+    Parameters
+    ----------
+    snapshotdir : str
+        directory of .png files
+
+    Returns
+    -------
+    filenames of image files : list
+
+    Raises
+    ------
+    ValueError
+        if the given directory doesn't exist
+    RuntimeError
+        if no files with extension png were found
+
+    """
+
     # snapshotdir = 'data/raw_snapshots/psII'
 
     if not os.path.exists(snapshotdir):
@@ -47,13 +65,23 @@ def find_images(snapshotdir):
 
 
 def get_imagemetadata(fns):
-    '''
-    Get image filenames and metadata from filenames
-    Input:
-        fns: filenames of image files
-    Returns:
-        snapshotdf: pandas dataframe with snapshot metadata
-    '''
+    """Get image filenames and metadata from filenames
+    Parameters
+    ----------
+        fns : list
+            filenames of image files
+
+    Returns
+    -------
+        snapshotdf : pandas dataframe
+            dataframe of snapshot metadata
+
+    Raises
+    ------
+    ValueError
+        if the filenames do not have 6 pieces delimited by a `-`
+
+    """
 
     flist = list()
     for fn in fns:

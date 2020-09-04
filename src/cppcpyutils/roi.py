@@ -7,12 +7,18 @@ import numpy as np
 
 
 def copy_metadata(args):
-    '''Copy metadata for each image so it can be used for each ROI
-    Inputs:
-        args: commandline info from running the workflow
-    Returns:
-        args: updated args to include filename metadata
-    '''
+    """Copy metadata for each image so it can be used for each ROI
+
+    Parameters
+    ----------
+        args : dict
+            commandline info from running the workflow
+
+    Returns
+    -------
+        updated args to include filename metadata : dict
+
+    """
 
     # The result file should exist if plantcv-workflow.py was run
     if os.path.exists(args.result):
@@ -39,6 +45,23 @@ def copy_metadata(args):
 
 
 def write_output(args, i):
+    """Write Outputs for a single ROI
+
+    Parameters
+    ----------
+    args : dict
+        commandline arguments and image metadata
+    i : int
+        ROI number
+
+    Returns
+    -------
+
+    Notes
+    -----
+    Side effect of printing a json file to disk
+
+    """
     # Here I will name the results file with the ROI ID combined with the original result filename
     basename, ext = os.path.splitext(args.result)
     filename = basename + "-roi" + str(i) + ext
@@ -51,23 +74,40 @@ def write_output(args, i):
 
 
 def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hist=True, hue=False):
-    '''Analyze each ROI separately and store results
-    Inputs:
-        img: rgb image
-        c: object contours
-        h: object countour hierarchy
-        rc: roi contours
-        rh: roi contour hierarchy
-        threshold_mask: mask from threshold steps
-        args: commandline info from running the workflow
-        masked: boolean, whether to print masked images for each roi
-        gi: grayscale image that contains greenness index values. default is False to skip print.
-        shape: boolean, whether to print object shapes
-        hist: boolean, whether to print colorhistogram
-        hue: boolean, whether to print the hue false color
-    Returns:
-        final_mask: binary image of plant mask that includes both threshold and roi filter steps
-    '''
+    """Analyze each ROI separately and store results
+
+    Parameters
+    ----------
+    img : ndarray
+        rgb image
+    c : list
+        object contours
+    h : list
+        object countour hierarchy
+    rc : list
+        roi contours
+    rh : list
+        roi contour hierarchy
+    threshold_mask : ndarray
+        binary image (mask) from threshold steps
+    args : dict
+        commandline arguments and metadata from running the workflow
+    masked : boolean
+        whether to print masked rgb images for each roi
+    gi : boolean
+        whether to print greenness index false color
+    shape : boolean
+        whether to print object shapes on an image
+    hist : boolean
+        whether to print color histogram
+    hue : boolean
+        whether to save hsv color info and print the hue false color image
+
+    Returns
+    -------
+        binary image of plant mask that includes both threshold and roi filter steps : ndarray
+
+    """
 
     final_mask = np.zeros(shape=np.shape(img)[0:2], dtype='uint8')
 

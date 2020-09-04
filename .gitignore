@@ -49,3 +49,6 @@ coverage.xml
 *.pot
 .Rproj.user
 setup.txt
+
+#Documenation
+site/

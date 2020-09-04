@@ -3,14 +3,21 @@ import numpy as np
 
 
 def greenness_index(img, mask):
-    '''
-    compute greenness index
-    Inputs:
-        img: rgb image, numpy array
-        mask: binary image, numpy array
-    Outputs:
-        grayscale, numpy array
-    '''
+    """Compute greenness index
+
+    Parameters
+    ----------
+    img: numpy array
+        rgb image
+    mask: numpy-array
+        binary image
+
+
+    Returns
+    -------
+    grayscale image : numpy array
+
+    """
 
     # Compute greenness
     # split color channels

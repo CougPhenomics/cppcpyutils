@@ -12,20 +12,30 @@ def add_scalebar(pseudoimg,
                  barlocation='lower center',
                  fontprops=None,
                  scalebar=None):
-    '''
-    Arguments:
-        pseudoimg: a matplotlib figure
-        pixelresolution: physical size represented by a pixel in mm
-        barwidth: size of the scale bar in mm
-        barlabel: text for the bar label
-        barlocation: position of scale bar in figure, optional
-        fontprops: font properties as specified by matplotlib.font_manager, optional
-        scalebar: a preestablished scale bar, optional
+    """Add scalebar to matplotlib false color image
 
-    Returns:
-        matplotlib figure
+    Parameters
+    ----------
+    pseudoimg : matplotlib figure
+        false color image
+    pixelresolution : int
+        physical size represented by a pixel in mm
+    barwidth : float
+        size of the scale bar in mm
+    barlabel : str
+        text for the bar label
+    barlocation : str or tuple
+        position of scale bar in figure, optional
+    fontprops : mpl.fm
+        font properties as specified by matplotlib.font_manager, optional
+    scalebar : mpl axis object
+        a preestablished scale bar, optional
 
-    '''
+    Returns
+    -------
+    pseudoimg with a scalebar : matplotlib figure
+
+    """
 
     if fontprops is None:
         fontprops = fm.FontProperties(size=8, weight='bold')
@@ -50,12 +60,23 @@ def add_scalebar(pseudoimg,
 
 
 def get_colors(style='imagingwin'):
-    '''
-    Input:
-        style - define custom colors. Default is "imagingwin".
-    Returns:
-        an array of colors
-    '''
+    """
+    Parameters
+    ----------
+    style : str
+        name of custom color palette. Default is "imagingwin"
+
+    Returns
+    -------
+    an array of colors : ndarray
+
+
+    Raises
+    ------
+    ValueError
+        if style is not recognized
+
+    """
 
     if style == 'imagingwin':
         hsv = cm.get_cmap('hsv', 256)
@@ -77,12 +98,17 @@ def get_colors(style='imagingwin'):
 
 
 def get_cmap(style='imagingwin'):
-    '''
-    Input:
-        style - choose your custom colormap by name. Default is "imagingwin".
-    Output:
-        a colormap for use with matplotlib
-    '''
+    """
+    Parameters
+    ----------
+    style : str
+        name of custom color palette. Default is "imagingwin"
+
+    Returns
+    -------
+    a matplotlib Colormap
+
+    """
 
     cmapcolors = get_colors(style)
     newcmp = ListedColormap(cmapcolors)
