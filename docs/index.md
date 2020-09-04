@@ -1,6 +1,6 @@
 # cppcpyutils
 
-Utilities for image processing pipelines at the Compact Plants Phenomics Center at Washingtion State University - Pullman. Pipelines are designed around [PlantCV](https://github.com/danforthcenter/plantcv)
+Utilities for image processing pipelines at the [Compact Plants Phenomics Center](http://phenomics.cahnrs.wsu.edu/facilities/cppc/) at Washingtion State University - Pullman. Pipelines are designed around [PlantCV](https://github.com/danforthcenter/plantcv)
 
 ## Installation
 
@@ -17,7 +17,7 @@ Install dev version
 There are two components to the package:
 
 1. A command line interface to download images from the LemnaTec database which is documented [here](LT_db_extractor.md)
-2. A python package that wraps some commonly used processes in the PlantCV workflows.
+2. A python package that wraps some commonly used processes in the PlantCV workflows. The API reference is [here](https://cougphenomics.github.io/cppcpyutils/cppcpyutils)
 
 At the top of a PlantCV workflow starts with:
 

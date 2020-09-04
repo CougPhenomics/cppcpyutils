@@ -1,4 +1,0 @@
-site_name: CPPC Python Utilities
-nav:
-  - About: about.md
-  - Data Extraction Tool: LT_db_extractor.md

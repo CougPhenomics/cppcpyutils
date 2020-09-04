@@ -1,0 +1,14 @@
+---
+  theme: jekyll-theme-minimal
+
+  title : cppcpyutils
+  author :
+    name : Dominik Schneider
+    email : dominik.schneider@wsu.edu
+    github : dschneiderch
+
+  markdown: kramdown
+
+  github:
+    username  : dschneiderch
+    project   : cppcpyutils

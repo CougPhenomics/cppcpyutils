@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>cppcpyutils.roi API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>cppcpyutils.roi</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import os
+from plantcv import plantcv as pcv
+import cppcpyutils as cppc
+import re
+import json
+import numpy as np
+
+
+def copy_metadata(args):
+    &#34;&#34;&#34;Copy metadata for each image so it can be used for each ROI
+
+    Parameters
+    ----------
+        args : dict
+            commandline info from running the workflow
+
+    Returns
+    -------
+        updated args to include filename metadata : dict
+
+    &#34;&#34;&#34;
+
+    # The result file should exist if plantcv-workflow.py was run
+    if os.path.exists(args.result):
+        # Open the result file
+        results = open(args.result, &#34;r&#34;)
+        # The result file would have image metadata in it from plantcv-workflow.py, read it into memory
+        args.metadata = json.load(results)
+        # Close the file
+        results.close()
+        # Delete the file, we will create new ones
+        os.remove(args.result)
+        args.plantbarcode = args.metadata[&#39;metadata&#39;][&#39;plantbarcode&#39;][&#39;value&#39;]
+        print(&#39;\n&#39;)
+        print(args.plantbarcode,
+              args.metadata[&#39;metadata&#39;][&#39;timestamp&#39;][&#39;value&#39;],
+              sep=&#39; - &#39;)
+    else:
+        # If the file did not exist (for testing), initialize metadata as an empty string
+        args.metadata = {}
+        regpat = re.compile(args.regex)
+        args.plantbarcode = re.search(regpat, args.image).groups()[0]
+
+    return args
+
+
+def write_output(args, i):
+    &#34;&#34;&#34;Write Outputs for a single ROI
+
+    Parameters
+    ----------
+    args : dict
+        commandline arguments and image metadata
+    i : int
+        ROI number
+
+    Returns
+    -------
+
+    Notes
+    -----
+    Side effect of printing a json file to disk
+
+    &#34;&#34;&#34;
+    # Here I will name the results file with the ROI ID combined with the original result filename
+    basename, ext = os.path.splitext(args.result)
+    filename = basename + &#34;-roi&#34; + str(i) + ext
+    # Save the existing metadata to the new file
+    with open(filename, &#34;w&#34;) as r:
+        json.dump(args.metadata, r)
+    pcv.print_results(filename=filename)
+    # The results are saved, now clear out the observations so the next loop adds new ones for the next plant
+    pcv.outputs.clear()
+
+
+def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hist=True, hue=False):
+    &#34;&#34;&#34;Analyze each ROI separately and store results
+
+    Parameters
+    ----------
+    img : ndarray
+        rgb image
+    c : list
+        object contours
+    h : list
+        object countour hierarchy
+    rc : list
+        roi contours
+    rh : list
+        roi contour hierarchy
+    threshold_mask : ndarray
+        binary image (mask) from threshold steps
+    args : dict
+        commandline arguments and metadata from running the workflow
+    masked : boolean
+        whether to print masked rgb images for each roi
+    gi : boolean
+        whether to print greenness index false color
+    shape : boolean
+        whether to print object shapes on an image
+    hist : boolean
+        whether to print color histogram
+    hue : boolean
+        whether to save hsv color info and print the hue false color image
+
+    Returns
+    -------
+        binary image of plant mask that includes both threshold and roi filter steps : ndarray
+
+    &#34;&#34;&#34;
+
+    final_mask = np.zeros(shape=np.shape(img)[0:2], dtype=&#39;uint8&#39;)
+
+    # Compute greenness
+    if gi:
+        img_gi = cppc.compute.greenness_index(img=img, mask=final_mask+1)
+
+    if hue:
+        img_h = pcv.rgb2gray_hsv(img, &#39;h&#39;)
+
+    for i, rc_i in enumerate(rc):
+        rh_i = rh[i]
+
+        # Add ROI number to output. Before roi_objects so result has NA if no object.
+        pcv.outputs.add_observation(
+            variable=&#39;roi&#39;,
+            trait=&#39;roi&#39;,
+            method=&#39;roi&#39;,
+            scale=&#39;int&#39;,
+            datatype=int,
+            value=i,
+            label=&#39;#&#39;)
+
+        roi_obj, hierarchy_obj, submask, obj_area = pcv.roi_objects(
+            img, roi_contour=rc_i, roi_hierarchy=rh_i, object_contour=c, obj_hierarchy=h, roi_type=&#39;partial&#39;)
+
+        if obj_area == 0:
+
+            print(&#39;\t!!! No object found in ROI&#39;, str(i))
+            pcv.outputs.add_observation(
+                variable=&#39;plantarea&#39;,
+                trait=&#39;plant area in sq mm&#39;,
+                method=&#39;observations.area*pixelresolution^2&#39;,
+                scale=cppc.pixelresolution,
+                datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                value=0,
+                label=&#39;sq mm&#39;)
+
+        else:
+
+            # Combine multiple objects
+            # ple plant objects within an roi together
+            plant_object, plant_mask = pcv.object_composition(
+                img=img, contours=roi_obj, hierarchy=hierarchy_obj)
+
+            final_mask = pcv.image_add(final_mask, plant_mask)
+
+            if gi:
+                # Save greenness for individual ROI
+                grnindex = cppc.utils.mean(img_gi, plant_mask)
+                grnindexstd = cppc.utils.std(img_gi, plant_mask)
+                pcv.outputs.add_observation(
+                    variable=&#39;greenness_index&#39;,
+                    trait=&#39;mean normalized greenness index&#39;,
+                    method=&#39;g/sum(b+g+r)&#39;,
+                    scale=&#39;[0,1]&#39;,
+                    datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                    value=float(grnindex),
+                    label=&#39;/1&#39;)
+
+                pcv.outputs.add_observation(
+                    variable=&#39;greenness_index_std&#39;,
+                    trait=&#39;std normalized greenness index&#39;,
+                    method=&#39;g/sum(b+g+r)&#39;,
+                    scale=&#39;[0,1]&#39;,
+                    datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                    value=float(grnindexstd),
+                    label=&#39;/1&#39;)
+
+            # Analyze all colors
+            if hist:
+                colorhist = pcv.analyze_color(img, plant_mask, &#39;all&#39;)
+            elif hue:
+                _ = pcv.analyze_color(img, plant_mask, &#39;hsv&#39;)
+
+            # Analyze the shape of the current plant (always do this even if shape is False so you can get plant_area)
+            img_shape = pcv.analyze_object(img, plant_object, plant_mask)
+            plant_area = pcv.outputs.observations[&#39;area&#39;][&#39;value&#39;] * cppc.pixelresolution**2
+            pcv.outputs.add_observation(
+                variable=&#39;plantarea&#39;,
+                trait=&#39;plant area in sq mm&#39;,
+                method=&#39;observations.area*pixelresolution^2&#39;,
+                scale=cppc.pixelresolution,
+                datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                value=plant_area,
+                label=&#39;sq mm&#39;)
+        # end if-else
+
+        # At this point we have observations for one plant
+        # We can write these out to a unique results file
+        write_output(args, i)
+
+        if args.writeimg and obj_area != 0:
+            if shape:
+                imgdir = os.path.join(args.outdir, &#39;shape_images&#39;, args.plantbarcode)
+                os.makedirs(imgdir, exist_ok=True)
+                pcv.print_image(img_shape, os.path.join(imgdir, args.imagename + &#39;-roi&#39; + str(i) + &#39;-shape.png&#39;))
+
+            if hist:
+                imgdir = os.path.join(args.outdir, &#39;colorhist_images&#39;, args.plantbarcode)
+                os.makedirs(imgdir, exist_ok=True)
+                pcv.print_image(colorhist, os.path.join(imgdir, args.imagename + &#39;-roi&#39; + str(i) + &#39;-colorhist.png&#39;))
+
+            if masked:
+                # save masked rgb image for entire tray but only 1 plant
+                imgdir = os.path.join(args.outdir, &#39;maskedrgb_images&#39;)
+                os.makedirs(imgdir, exist_ok=True)
+                img_masked = pcv.apply_mask(img, plant_mask, &#39;black&#39;)
+                pcv.print_image(
+                    img_masked,
+                    os.path.join(imgdir,
+                                 args.imagename + &#39;-roi&#39; + str(i) + &#39;-masked.png&#39;))
+
+            if hue:
+                # save hue false color image for entire tray but only 1 plant
+                imgdir = os.path.join(args.outdir, &#39;hue_images&#39;)
+                os.makedirs(imgdir, exist_ok=True)
+                fig_hue = pcv.visualize.pseudocolor(img_h*2, obj=None,
+                                                    mask=plant_mask,
+                                                    cmap=cppc.viz.get_cmap(&#39;hue&#39;),
+                                                    axes=False,
+                                                    min_value=0, max_value=179,
+                                                    background=&#39;black&#39;, obj_padding=0)
+                fig_hue = cppc.viz.add_scalebar(fig_hue,
+                                    pixelresolution=cppc.pixelresolution,
+                                    barwidth=10,
+                                    barlabel=&#39;1 cm&#39;,
+                                    barlocation=&#39;lower left&#39;)
+                fig_hue.set_size_inches(6, 6, forward=False)
+                fig_hue.savefig(os.path.join(imgdir, args.imagename + &#39;-roi&#39; + str(i) + &#39;-hue.png&#39;),
+                                bbox_inches=&#39;tight&#39;,
+                                dpi=300)
+                fig_hue.clf()
+
+            if gi:
+                # save grnness image of entire tray but only 1 plant
+                imgdir = os.path.join(args.outdir, &#39;grnindex_images&#39;)
+                os.makedirs(imgdir, exist_ok=True)
+                fig_gi = pcv.visualize.pseudocolor(img_gi,
+                                                   obj=None,
+                                                   mask=plant_mask,
+                                                   cmap=&#39;viridis&#39;,
+                                                   axes=False,
+                                                   min_value=0.3,
+                                                   max_value=0.6,
+                                                   background=&#39;black&#39;,
+                                                   obj_padding=0)
+                fig_gi = cppc.viz.add_scalebar(
+                    fig_gi,
+                    pixelresolution=cppc.pixelresolution,
+                    barwidth=10,
+                    barlabel=&#39;1 cm&#39;,
+                    barlocation=&#39;lower left&#39;)
+                fig_gi.set_size_inches(6, 6, forward=False)
+                fig_gi.savefig(os.path.join(
+                    imgdir,
+                    args.imagename + &#39;-roi&#39; + str(i) + &#39;-greenness.png&#39;),
+                               bbox_inches=&#39;tight&#39;,
+                               dpi=300)
+                fig_gi.clf()
+
+        # end roi loop
+    return final_mask</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="cppcpyutils.roi.copy_metadata"><code class="name flex">
+<span>def <span class="ident">copy_metadata</span></span>(<span>args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Copy metadata for each image so it can be used for each ROI</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>args : dict
+    commandline info from running the workflow
+</code></pre>
+<h2 id="returns">Returns</h2>
+<pre><code>updated args to include filename metadata : dict
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy_metadata(args):
+    &#34;&#34;&#34;Copy metadata for each image so it can be used for each ROI
+
+    Parameters
+    ----------
+        args : dict
+            commandline info from running the workflow
+
+    Returns
+    -------
+        updated args to include filename metadata : dict
+
+    &#34;&#34;&#34;
+
+    # The result file should exist if plantcv-workflow.py was run
+    if os.path.exists(args.result):
+        # Open the result file
+        results = open(args.result, &#34;r&#34;)
+        # The result file would have image metadata in it from plantcv-workflow.py, read it into memory
+        args.metadata = json.load(results)
+        # Close the file
+        results.close()
+        # Delete the file, we will create new ones
+        os.remove(args.result)
+        args.plantbarcode = args.metadata[&#39;metadata&#39;][&#39;plantbarcode&#39;][&#39;value&#39;]
+        print(&#39;\n&#39;)
+        print(args.plantbarcode,
+              args.metadata[&#39;metadata&#39;][&#39;timestamp&#39;][&#39;value&#39;],
+              sep=&#39; - &#39;)
+    else:
+        # If the file did not exist (for testing), initialize metadata as an empty string
+        args.metadata = {}
+        regpat = re.compile(args.regex)
+        args.plantbarcode = re.search(regpat, args.image).groups()[0]
+
+    return args</code></pre>
+</details>
+</dd>
+<dt id="cppcpyutils.roi.iterate_rois"><code class="name flex">
+<span>def <span class="ident">iterate_rois</span></span>(<span>img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hist=True, hue=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Analyze each ROI separately and store results</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>img</code></strong> :&ensp;<code>ndarray</code></dt>
+<dd>rgb image</dd>
+<dt><strong><code>c</code></strong> :&ensp;<code>list</code></dt>
+<dd>object contours</dd>
+<dt><strong><code>h</code></strong> :&ensp;<code>list</code></dt>
+<dd>object countour hierarchy</dd>
+<dt><strong><code>rc</code></strong> :&ensp;<code>list</code></dt>
+<dd>roi contours</dd>
+<dt><strong><code>rh</code></strong> :&ensp;<code>list</code></dt>
+<dd>roi contour hierarchy</dd>
+<dt><strong><code>threshold_mask</code></strong> :&ensp;<code>ndarray</code></dt>
+<dd>binary image (mask) from threshold steps</dd>
+<dt><strong><code>args</code></strong> :&ensp;<code>dict</code></dt>
+<dd>commandline arguments and metadata from running the workflow</dd>
+<dt><strong><code>masked</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>whether to print masked rgb images for each roi</dd>
+<dt><strong><code>gi</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>whether to print greenness index false color</dd>
+<dt><strong><code>shape</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>whether to print object shapes on an image</dd>
+<dt><strong><code>hist</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>whether to print color histogram</dd>
+<dt><strong><code>hue</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>whether to save hsv color info and print the hue false color image</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<pre><code>binary image of plant mask that includes both threshold and roi filter steps : ndarray
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hist=True, hue=False):
+    &#34;&#34;&#34;Analyze each ROI separately and store results
+
+    Parameters
+    ----------
+    img : ndarray
+        rgb image
+    c : list
+        object contours
+    h : list
+        object countour hierarchy
+    rc : list
+        roi contours
+    rh : list
+        roi contour hierarchy
+    threshold_mask : ndarray
+        binary image (mask) from threshold steps
+    args : dict
+        commandline arguments and metadata from running the workflow
+    masked : boolean
+        whether to print masked rgb images for each roi
+    gi : boolean
+        whether to print greenness index false color
+    shape : boolean
+        whether to print object shapes on an image
+    hist : boolean
+        whether to print color histogram
+    hue : boolean
+        whether to save hsv color info and print the hue false color image
+
+    Returns
+    -------
+        binary image of plant mask that includes both threshold and roi filter steps : ndarray
+
+    &#34;&#34;&#34;
+
+    final_mask = np.zeros(shape=np.shape(img)[0:2], dtype=&#39;uint8&#39;)
+
+    # Compute greenness
+    if gi:
+        img_gi = cppc.compute.greenness_index(img=img, mask=final_mask+1)
+
+    if hue:
+        img_h = pcv.rgb2gray_hsv(img, &#39;h&#39;)
+
+    for i, rc_i in enumerate(rc):
+        rh_i = rh[i]
+
+        # Add ROI number to output. Before roi_objects so result has NA if no object.
+        pcv.outputs.add_observation(
+            variable=&#39;roi&#39;,
+            trait=&#39;roi&#39;,
+            method=&#39;roi&#39;,
+            scale=&#39;int&#39;,
+            datatype=int,
+            value=i,
+            label=&#39;#&#39;)
+
+        roi_obj, hierarchy_obj, submask, obj_area = pcv.roi_objects(
+            img, roi_contour=rc_i, roi_hierarchy=rh_i, object_contour=c, obj_hierarchy=h, roi_type=&#39;partial&#39;)
+
+        if obj_area == 0:
+
+            print(&#39;\t!!! No object found in ROI&#39;, str(i))
+            pcv.outputs.add_observation(
+                variable=&#39;plantarea&#39;,
+                trait=&#39;plant area in sq mm&#39;,
+                method=&#39;observations.area*pixelresolution^2&#39;,
+                scale=cppc.pixelresolution,
+                datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                value=0,
+                label=&#39;sq mm&#39;)
+
+        else:
+
+            # Combine multiple objects
+            # ple plant objects within an roi together
+            plant_object, plant_mask = pcv.object_composition(
+                img=img, contours=roi_obj, hierarchy=hierarchy_obj)
+
+            final_mask = pcv.image_add(final_mask, plant_mask)
+
+            if gi:
+                # Save greenness for individual ROI
+                grnindex = cppc.utils.mean(img_gi, plant_mask)
+                grnindexstd = cppc.utils.std(img_gi, plant_mask)
+                pcv.outputs.add_observation(
+                    variable=&#39;greenness_index&#39;,
+                    trait=&#39;mean normalized greenness index&#39;,
+                    method=&#39;g/sum(b+g+r)&#39;,
+                    scale=&#39;[0,1]&#39;,
+                    datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                    value=float(grnindex),
+                    label=&#39;/1&#39;)
+
+                pcv.outputs.add_observation(
+                    variable=&#39;greenness_index_std&#39;,
+                    trait=&#39;std normalized greenness index&#39;,
+                    method=&#39;g/sum(b+g+r)&#39;,
+                    scale=&#39;[0,1]&#39;,
+                    datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                    value=float(grnindexstd),
+                    label=&#39;/1&#39;)
+
+            # Analyze all colors
+            if hist:
+                colorhist = pcv.analyze_color(img, plant_mask, &#39;all&#39;)
+            elif hue:
+                _ = pcv.analyze_color(img, plant_mask, &#39;hsv&#39;)
+
+            # Analyze the shape of the current plant (always do this even if shape is False so you can get plant_area)
+            img_shape = pcv.analyze_object(img, plant_object, plant_mask)
+            plant_area = pcv.outputs.observations[&#39;area&#39;][&#39;value&#39;] * cppc.pixelresolution**2
+            pcv.outputs.add_observation(
+                variable=&#39;plantarea&#39;,
+                trait=&#39;plant area in sq mm&#39;,
+                method=&#39;observations.area*pixelresolution^2&#39;,
+                scale=cppc.pixelresolution,
+                datatype=&#34;&lt;class &#39;float&#39;&gt;&#34;,
+                value=plant_area,
+                label=&#39;sq mm&#39;)
+        # end if-else
+
+        # At this point we have observations for one plant
+        # We can write these out to a unique results file
+        write_output(args, i)
+
+        if args.writeimg and obj_area != 0:
+            if shape:
+                imgdir = os.path.join(args.outdir, &#39;shape_images&#39;, args.plantbarcode)
+                os.makedirs(imgdir, exist_ok=True)
+                pcv.print_image(img_shape, os.path.join(imgdir, args.imagename + &#39;-roi&#39; + str(i) + &#39;-shape.png&#39;))
+
+            if hist:
+                imgdir = os.path.join(args.outdir, &#39;colorhist_images&#39;, args.plantbarcode)
+                os.makedirs(imgdir, exist_ok=True)
+                pcv.print_image(colorhist, os.path.join(imgdir, args.imagename + &#39;-roi&#39; + str(i) + &#39;-colorhist.png&#39;))
+
+            if masked:
+                # save masked rgb image for entire tray but only 1 plant
+                imgdir = os.path.join(args.outdir, &#39;maskedrgb_images&#39;)
+                os.makedirs(imgdir, exist_ok=True)
+                img_masked = pcv.apply_mask(img, plant_mask, &#39;black&#39;)
+                pcv.print_image(
+                    img_masked,
+                    os.path.join(imgdir,
+                                 args.imagename + &#39;-roi&#39; + str(i) + &#39;-masked.png&#39;))
+
+            if hue:
+                # save hue false color image for entire tray but only 1 plant
+                imgdir = os.path.join(args.outdir, &#39;hue_images&#39;)
+                os.makedirs(imgdir, exist_ok=True)
+                fig_hue = pcv.visualize.pseudocolor(img_h*2, obj=None,
+                                                    mask=plant_mask,
+                                                    cmap=cppc.viz.get_cmap(&#39;hue&#39;),
+                                                    axes=False,
+                                                    min_value=0, max_value=179,
+                                                    background=&#39;black&#39;, obj_padding=0)
+                fig_hue = cppc.viz.add_scalebar(fig_hue,
+                                    pixelresolution=cppc.pixelresolution,
+                                    barwidth=10,
+                                    barlabel=&#39;1 cm&#39;,
+                                    barlocation=&#39;lower left&#39;)
+                fig_hue.set_size_inches(6, 6, forward=False)
+                fig_hue.savefig(os.path.join(imgdir, args.imagename + &#39;-roi&#39; + str(i) + &#39;-hue.png&#39;),
+                                bbox_inches=&#39;tight&#39;,
+                                dpi=300)
+                fig_hue.clf()
+
+            if gi:
+                # save grnness image of entire tray but only 1 plant
+                imgdir = os.path.join(args.outdir, &#39;grnindex_images&#39;)
+                os.makedirs(imgdir, exist_ok=True)
+                fig_gi = pcv.visualize.pseudocolor(img_gi,
+                                                   obj=None,
+                                                   mask=plant_mask,
+                                                   cmap=&#39;viridis&#39;,
+                                                   axes=False,
+                                                   min_value=0.3,
+                                                   max_value=0.6,
+                                                   background=&#39;black&#39;,
+                                                   obj_padding=0)
+                fig_gi = cppc.viz.add_scalebar(
+                    fig_gi,
+                    pixelresolution=cppc.pixelresolution,
+                    barwidth=10,
+                    barlabel=&#39;1 cm&#39;,
+                    barlocation=&#39;lower left&#39;)
+                fig_gi.set_size_inches(6, 6, forward=False)
+                fig_gi.savefig(os.path.join(
+                    imgdir,
+                    args.imagename + &#39;-roi&#39; + str(i) + &#39;-greenness.png&#39;),
+                               bbox_inches=&#39;tight&#39;,
+                               dpi=300)
+                fig_gi.clf()
+
+        # end roi loop
+    return final_mask</code></pre>
+</details>
+</dd>
+<dt id="cppcpyutils.roi.write_output"><code class="name flex">
+<span>def <span class="ident">write_output</span></span>(<span>args, i)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write Outputs for a single ROI</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>args</code></strong> :&ensp;<code>dict</code></dt>
+<dd>commandline arguments and image metadata</dd>
+<dt><strong><code>i</code></strong> :&ensp;<code>int</code></dt>
+<dd>ROI number</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<h2 id="notes">Notes</h2>
+<p>Side effect of printing a json file to disk</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_output(args, i):
+    &#34;&#34;&#34;Write Outputs for a single ROI
+
+    Parameters
+    ----------
+    args : dict
+        commandline arguments and image metadata
+    i : int
+        ROI number
+
+    Returns
+    -------
+
+    Notes
+    -----
+    Side effect of printing a json file to disk
+
+    &#34;&#34;&#34;
+    # Here I will name the results file with the ROI ID combined with the original result filename
+    basename, ext = os.path.splitext(args.result)
+    filename = basename + &#34;-roi&#34; + str(i) + ext
+    # Save the existing metadata to the new file
+    with open(filename, &#34;w&#34;) as r:
+        json.dump(args.metadata, r)
+    pcv.print_results(filename=filename)
+    # The results are saved, now clear out the observations so the next loop adds new ones for the next plant
+    pcv.outputs.clear()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="cppcpyutils" href="index.html">cppcpyutils</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="cppcpyutils.roi.copy_metadata" href="#cppcpyutils.roi.copy_metadata">copy_metadata</a></code></li>
+<li><code><a title="cppcpyutils.roi.iterate_rois" href="#cppcpyutils.roi.iterate_rois">iterate_rois</a></code></li>
+<li><code><a title="cppcpyutils.roi.write_output" href="#cppcpyutils.roi.write_output">write_output</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
