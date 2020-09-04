@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 module = "cppcpyutils"
 author = "Dominik Schneider"
 author-email = "dominik.schneider@wsu.edu"
-home-page = "https://github.com/CougPhenomics/cppcpyutils"
+home-page = "https://CougPhenomics.github.io/cppcpyutils"
 description-file = "README.md"
 classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
 keywords = 'plant phenotyping bioinformatics'
@@ -22,7 +22,9 @@ test = [
     "pytest >=2.7.3",
     "pytest-cov",
 ]
-
+doc = [
+    "pdoc3"
+]
 
 [tool.flit.scripts]
 LT_db_extractor = "cppcpyutils.LT_db_extractor:main"
