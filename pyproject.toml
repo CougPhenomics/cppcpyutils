@@ -25,6 +25,9 @@ test = [
 doc = [
     "pdoc3"
 ]
+dev = [
+    "flit"
+]
 
 [tool.flit.scripts]
 LT_db_extractor = "cppcpyutils.LT_db_extractor:main"
