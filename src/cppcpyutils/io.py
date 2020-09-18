@@ -51,8 +51,6 @@ def find_images(snapshotdir):
 
     """
 
-    # snapshotdir = 'data/raw_snapshots/psII'
-
     if not os.path.exists(snapshotdir):
         raise ValueError('the path %s does not exist' % snapshotdir)
 
