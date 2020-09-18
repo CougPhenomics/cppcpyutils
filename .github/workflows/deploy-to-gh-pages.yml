@@ -1,5 +1,5 @@
 
-name: Build and Deploy
+name: Build Docs and Deploy Static Site
 on:
   push:
     branches:
@@ -24,7 +24,7 @@ jobs:
           python -m pip install flit
 
       - name: Install dependencies
-        run: python -m flit install
+        run: python -m flit install develop
 
       - name: Build Docs 🔧
         run: |
