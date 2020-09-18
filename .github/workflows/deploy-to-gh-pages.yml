@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - githubactions
+
 jobs:
   build-and-deploy:
     runs-on: windows-latest
@@ -18,15 +19,14 @@ jobs:
         with:
           python-version: '3.8'
 
-      - name: Upgrade pip
+      - name: Install flit
         run: |
-          # install pip=>20.1 to use "pip cache dir"
           python -m pip install flit
 
       - name: Install dependencies
-        run: python -m flit build
+        run: python -m flit install
 
-      - name: Install and Build Docs 🔧
+      - name: Build Docs 🔧
         run: |
           pdoc3 --html cppcpyutils -o docs --force
 
