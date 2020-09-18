@@ -3,7 +3,7 @@ name: Build Docs and Deploy Static Site
 on:
   push:
     branches:
-      - githubactions
+      - master
 
 jobs:
   build-and-deploy:
