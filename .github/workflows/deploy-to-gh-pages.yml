@@ -24,7 +24,7 @@ jobs:
           python -m pip install flit
 
       - name: Install dependencies
-        run: python -m flit install
+        run: python -m flit install doc
 
       - name: Build Docs 🔧
         run: |
@@ -34,6 +34,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: master
-          FOLDER: docs
+          publish_branch: master
+          publish_dir: docs
 
