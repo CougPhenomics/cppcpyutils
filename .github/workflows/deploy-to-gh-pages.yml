@@ -2,8 +2,6 @@
 name: Build Docs and Deploy Static Site
 on:
   pull_request:
-    branches:
-      - master
     types: [closed]
 
 jobs:
