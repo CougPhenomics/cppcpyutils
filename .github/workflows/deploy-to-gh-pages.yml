@@ -24,7 +24,7 @@ jobs:
           python -m pip install flit
 
       - name: Install dependencies
-        run: python -m flit install --deps develop
+        run: python -m flit install --deps develop --extras doc
 
       - name: Build Docs 🔧
         run: |
