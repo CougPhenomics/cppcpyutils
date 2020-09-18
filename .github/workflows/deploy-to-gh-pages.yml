@@ -1,7 +1,7 @@
 
 name: Build Docs and Deploy Static Site
 on:
-  push:
+  pull_request:
     branches:
       - master
 
