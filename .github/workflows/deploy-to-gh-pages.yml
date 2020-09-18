@@ -1,7 +1,8 @@
 
 name: Build Docs and Deploy Static Site
 on:
-  pull_request
+  pull_request:
+      - master
 
 jobs:
   build-and-deploy:
