@@ -21,10 +21,10 @@ jobs:
       - name: Upgrade pip
         run: |
           # install pip=>20.1 to use "pip cache dir"
-          python3 -m pip install --upgrade pip flit
+          python -m pip install flit
 
       - name: Install dependencies
-        run: python3 -m flit build
+        run: python -m flit build
 
       - name: Install and Build Docs 🔧
         run: |
