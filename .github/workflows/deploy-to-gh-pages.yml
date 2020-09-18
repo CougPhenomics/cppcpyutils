@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - master
+      - githubactions
 jobs:
   build-and-deploy:
     runs-on: windows-latest
@@ -12,6 +12,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Upgrade pip
+        run: |
+          # install pip=>20.1 to use "pip cache dir"
+          python3 -m pip install --upgrade pip flit
+
+      - name: Install dependencies
+        run: python3 -m flit build
 
       - name: Install and Build Docs 🔧
         run: |
