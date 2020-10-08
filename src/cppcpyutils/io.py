@@ -133,15 +133,18 @@ def get_imagemetadata(fns, delimiter):
 def parse_filename(filename, delimiter, regex):
     """Parse the input filename and return a list of metadata.
 
-    Args:
-        filename:   Filename to parse metadata from
-        delimiter:  Delimiter character to split the filename on
-        regex:      Compiled regular expression pattern to process file with
+    Parameters
+    ----------
+        filename : str
+            Filename to parse metadata from
+        delimiter :  str
+            Delimiter character to split the filename on
+        regex : re.Pattern
+            Compiled regular expression pattern to process file with
 
-    :param filename: str
-    :param delimiter: str
-    :param regex: re.Pattern
-    :return metadata: list
+    Returns
+    -------
+        metadata : list
     """
 
     # Split the filename on delimiter if it is a single character

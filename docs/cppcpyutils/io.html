@@ -161,15 +161,18 @@ def get_imagemetadata(fns, delimiter):
 def parse_filename(filename, delimiter, regex):
     &#34;&#34;&#34;Parse the input filename and return a list of metadata.
 
-    Args:
-        filename:   Filename to parse metadata from
-        delimiter:  Delimiter character to split the filename on
-        regex:      Compiled regular expression pattern to process file with
+    Parameters
+    ----------
+        filename : str
+            Filename to parse metadata from
+        delimiter :  str
+            Delimiter character to split the filename on
+        regex : re.Pattern
+            Compiled regular expression pattern to process file with
 
-    :param filename: str
-    :param delimiter: str
-    :param regex: re.Pattern
-    :return metadata: list
+    Returns
+    -------
+        metadata : list
     &#34;&#34;&#34;
 
     # Split the filename on delimiter if it is a single character
@@ -395,21 +398,17 @@ either single character delimiter or a regex string</p>
 </code></dt>
 <dd>
 <div class="desc"><p>Parse the input filename and return a list of metadata.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>filename</code></strong></dt>
-<dd>Filename to parse metadata from</dd>
-<dt><strong><code>delimiter</code></strong></dt>
-<dd>Delimiter character to split the filename on</dd>
-<dt><strong><code>regex</code></strong></dt>
-<dd>
-<p>Compiled regular expression pattern to process file with</p>
-</dd>
-</dl>
-<p>:param filename: str
-:param delimiter: str
-:param regex: re.Pattern
-:return metadata: list</p></div>
+<h2 id="parameters">Parameters</h2>
+<pre><code>filename : str
+    Filename to parse metadata from
+delimiter :  str
+    Delimiter character to split the filename on
+regex : re.Pattern
+    Compiled regular expression pattern to process file with
+</code></pre>
+<h2 id="returns">Returns</h2>
+<pre><code>metadata : list
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -417,15 +416,18 @@ either single character delimiter or a regex string</p>
 <pre><code class="python">def parse_filename(filename, delimiter, regex):
     &#34;&#34;&#34;Parse the input filename and return a list of metadata.
 
-    Args:
-        filename:   Filename to parse metadata from
-        delimiter:  Delimiter character to split the filename on
-        regex:      Compiled regular expression pattern to process file with
+    Parameters
+    ----------
+        filename : str
+            Filename to parse metadata from
+        delimiter :  str
+            Delimiter character to split the filename on
+        regex : re.Pattern
+            Compiled regular expression pattern to process file with
 
-    :param filename: str
-    :param delimiter: str
-    :param regex: re.Pattern
-    :return metadata: list
+    Returns
+    -------
+        metadata : list
     &#34;&#34;&#34;
 
     # Split the filename on delimiter if it is a single character
