@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.8.1" />
+<meta name="generator" content="pdoc 0.9.1" />
 <title>cppcpyutils.io API documentation</title>
 <meta name="description" content="" />
-<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
-<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
 <style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 </head>
 <body>
 <main>
@@ -32,7 +34,7 @@ from datetime import timedelta
 import pandas as pd
 
 
-def import_snapshots(snapshotdir, camera=&#39;psII&#39;):
+def import_snapshots(snapshotdir, camera=&#39;psII&#39;, ext=&#39;png&#39;, delimiter=&#39;-&#39;):
     &#34;&#34;&#34;Import snapshots from PSII imaging
 
     Parameter
@@ -41,6 +43,10 @@ def import_snapshots(snapshotdir, camera=&#39;psII&#39;):
         path to image directory
     camera : str
         camera label for backwards compatibility (no longer used)
+    ext : str
+        extension of image files
+    delimiter : str
+        either single character delimiter or a regex string
 
     Returns
     -------
@@ -52,17 +58,19 @@ def import_snapshots(snapshotdir, camera=&#39;psII&#39;):
 
     &#34;&#34;&#34;
 
-    fns = find_images(snapshotdir)
-    return get_imagemetadata(fns)
+    fns = find_images(snapshotdir, ext)
+    return get_imagemetadata(fns, delimiter)
 
 
-def find_images(snapshotdir):
+def find_images(snapshotdir, ext):
     &#34;&#34;&#34;Find png images is specified directory
 
     Parameters
     ----------
     snapshotdir : str
-        directory of .png files
+        directory of image files
+    ext : str
+        extension of image files
 
     Returns
     -------
@@ -77,25 +85,26 @@ def find_images(snapshotdir):
 
     &#34;&#34;&#34;
 
-    # snapshotdir = &#39;data/raw_snapshots/psII&#39;
-
     if not os.path.exists(snapshotdir):
         raise ValueError(&#39;the path %s does not exist&#39; % snapshotdir)
 
-    fns = [fn for fn in glob.glob(pathname=os.path.join(snapshotdir, &#39;*.png&#39;))]
+    fns = [fn for fn in glob.glob(pathname=os.path.join(snapshotdir, &#39;*%s&#39; % ext))]
 
     if len(fns) == 0:
-        raise RuntimeError(&#39;No files with extension .png were found in the directory specified.&#39;)
+        raise RuntimeError(&#39;No files with extension %s were found in the directory specified.&#39; % ext)
 
     return(fns)
 
 
-def get_imagemetadata(fns):
+def get_imagemetadata(fns, delimiter):
     &#34;&#34;&#34;Get image filenames and metadata from filenames
     Parameters
     ----------
         fns : list
             filenames of image files
+        delimiter : str
+            single character or regex to split filename
+
 
     Returns
     -------
@@ -108,11 +117,15 @@ def get_imagemetadata(fns):
         if the filenames do not have 6 pieces delimited by a `-`
 
     &#34;&#34;&#34;
+    # Compile regex (even if it&#39;s only a delimiter character)
+    regex = re.compile(delimiter)
 
     flist = list()
-    for fn in fns:
-        f = re.split(&#39;[-]&#39;, os.path.splitext(os.path.basename(fn))[0])
-        f.append(fn)
+    for fullfn in fns:
+        fn = os.path.basename(fullfn)
+        fn = os.path.splitext(fn)
+        f = parse_filename(fn[0], delimiter, regex) #if delimiter is a single character it will split filenam with delimiter otherwise uses regex
+        f.append(fullfn)
         flist.append(f)
 
     try:
@@ -122,7 +135,7 @@ def get_imagemetadata(fns):
                             &#39;cameralabel&#39;, &#39;frameid&#39;, &#39;filename&#39;
                         ])
     except ValueError as e:
-        raise ValueError(&#39;The filenames did have correctly formated metadata separated by &#34;-&#34;.&#39;) from e
+        raise ValueError(&#39;The filenames did have correctly formated metadata as specified by delimiter argument.&#39;) from e
 
     # convert date and time columns to datetime format
     fdf[&#39;datetime&#39;] = pd.to_datetime(fdf[&#39;timestamp&#39;])
@@ -140,7 +153,36 @@ def get_imagemetadata(fns):
     fdf = fdf.set_index([&#39;plantbarcode&#39;, &#39;experiment&#39;, &#39;datetime&#39;,
                          &#39;jobdate&#39;]).drop(columns=[&#39;timestamp&#39;])
 
-    return fdf</code></pre>
+    return fdf
+
+
+# Filename metadata parser, from plantcv 3.10
+###########################################
+def parse_filename(filename, delimiter, regex):
+    &#34;&#34;&#34;Parse the input filename and return a list of metadata.
+
+    Args:
+        filename:   Filename to parse metadata from
+        delimiter:  Delimiter character to split the filename on
+        regex:      Compiled regular expression pattern to process file with
+
+    :param filename: str
+    :param delimiter: str
+    :param regex: re.Pattern
+    :return metadata: list
+    &#34;&#34;&#34;
+
+    # Split the filename on delimiter if it is a single character
+    if len(delimiter) == 1:
+        metadata = filename.split(delimiter)
+    else:
+        metadata = re.search(regex, filename)
+        if metadata is not None:
+            metadata = list(metadata.groups())
+        else:
+            metadata = []
+    return metadata
+###########################################</code></pre>
 </details>
 </section>
 <section>
@@ -151,14 +193,16 @@ def get_imagemetadata(fns):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="cppcpyutils.io.find_images"><code class="name flex">
-<span>def <span class="ident">find_images</span></span>(<span>snapshotdir)</span>
+<span>def <span class="ident">find_images</span></span>(<span>snapshotdir, ext)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Find png images is specified directory</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>snapshotdir</code></strong> :&ensp;<code>str</code></dt>
-<dd>directory of .png files</dd>
+<dd>directory of image files</dd>
+<dt><strong><code>ext</code></strong> :&ensp;<code>str</code></dt>
+<dd>extension of image files</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -176,13 +220,15 @@ def get_imagemetadata(fns):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def find_images(snapshotdir):
+<pre><code class="python">def find_images(snapshotdir, ext):
     &#34;&#34;&#34;Find png images is specified directory
 
     Parameters
     ----------
     snapshotdir : str
-        directory of .png files
+        directory of image files
+    ext : str
+        extension of image files
 
     Returns
     -------
@@ -197,21 +243,19 @@ def get_imagemetadata(fns):
 
     &#34;&#34;&#34;
 
-    # snapshotdir = &#39;data/raw_snapshots/psII&#39;
-
     if not os.path.exists(snapshotdir):
         raise ValueError(&#39;the path %s does not exist&#39; % snapshotdir)
 
-    fns = [fn for fn in glob.glob(pathname=os.path.join(snapshotdir, &#39;*.png&#39;))]
+    fns = [fn for fn in glob.glob(pathname=os.path.join(snapshotdir, &#39;*%s&#39; % ext))]
 
     if len(fns) == 0:
-        raise RuntimeError(&#39;No files with extension .png were found in the directory specified.&#39;)
+        raise RuntimeError(&#39;No files with extension %s were found in the directory specified.&#39; % ext)
 
     return(fns)</code></pre>
 </details>
 </dd>
 <dt id="cppcpyutils.io.get_imagemetadata"><code class="name flex">
-<span>def <span class="ident">get_imagemetadata</span></span>(<span>fns)</span>
+<span>def <span class="ident">get_imagemetadata</span></span>(<span>fns, delimiter)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Get image filenames and metadata from filenames
@@ -219,6 +263,8 @@ Parameters</p>
 <hr>
 <pre><code>fns : list
     filenames of image files
+delimiter : str
+    single character or regex to split filename
 </code></pre>
 <h2 id="returns">Returns</h2>
 <pre><code>snapshotdf : pandas dataframe
@@ -233,12 +279,15 @@ Parameters</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_imagemetadata(fns):
+<pre><code class="python">def get_imagemetadata(fns, delimiter):
     &#34;&#34;&#34;Get image filenames and metadata from filenames
     Parameters
     ----------
         fns : list
             filenames of image files
+        delimiter : str
+            single character or regex to split filename
+
 
     Returns
     -------
@@ -251,11 +300,15 @@ Parameters</p>
         if the filenames do not have 6 pieces delimited by a `-`
 
     &#34;&#34;&#34;
+    # Compile regex (even if it&#39;s only a delimiter character)
+    regex = re.compile(delimiter)
 
     flist = list()
-    for fn in fns:
-        f = re.split(&#39;[-]&#39;, os.path.splitext(os.path.basename(fn))[0])
-        f.append(fn)
+    for fullfn in fns:
+        fn = os.path.basename(fullfn)
+        fn = os.path.splitext(fn)
+        f = parse_filename(fn[0], delimiter, regex) #if delimiter is a single character it will split filenam with delimiter otherwise uses regex
+        f.append(fullfn)
         flist.append(f)
 
     try:
@@ -265,7 +318,7 @@ Parameters</p>
                             &#39;cameralabel&#39;, &#39;frameid&#39;, &#39;filename&#39;
                         ])
     except ValueError as e:
-        raise ValueError(&#39;The filenames did have correctly formated metadata separated by &#34;-&#34;.&#39;) from e
+        raise ValueError(&#39;The filenames did have correctly formated metadata as specified by delimiter argument.&#39;) from e
 
     # convert date and time columns to datetime format
     fdf[&#39;datetime&#39;] = pd.to_datetime(fdf[&#39;timestamp&#39;])
@@ -287,7 +340,7 @@ Parameters</p>
 </details>
 </dd>
 <dt id="cppcpyutils.io.import_snapshots"><code class="name flex">
-<span>def <span class="ident">import_snapshots</span></span>(<span>snapshotdir, camera='psII')</span>
+<span>def <span class="ident">import_snapshots</span></span>(<span>snapshotdir, camera='psII', ext='png', delimiter='-')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Import snapshots from PSII imaging</p>
@@ -295,7 +348,11 @@ Parameters</p>
 <p>snapshotdir : str
 path to image directory
 camera : str
-camera label for backwards compatibility (no longer used)</p>
+camera label for backwards compatibility (no longer used)
+ext : str
+extension of image files
+delimiter : str
+either single character delimiter or a regex string</p>
 <h2 id="returns">Returns</h2>
 <pre><code>pandas dataframe with snapshot metadata
 </code></pre>
@@ -305,7 +362,7 @@ camera label for backwards compatibility (no longer used)</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def import_snapshots(snapshotdir, camera=&#39;psII&#39;):
+<pre><code class="python">def import_snapshots(snapshotdir, camera=&#39;psII&#39;, ext=&#39;png&#39;, delimiter=&#39;-&#39;):
     &#34;&#34;&#34;Import snapshots from PSII imaging
 
     Parameter
@@ -314,6 +371,10 @@ camera label for backwards compatibility (no longer used)</p>
         path to image directory
     camera : str
         camera label for backwards compatibility (no longer used)
+    ext : str
+        extension of image files
+    delimiter : str
+        either single character delimiter or a regex string
 
     Returns
     -------
@@ -325,8 +386,58 @@ camera label for backwards compatibility (no longer used)</p>
 
     &#34;&#34;&#34;
 
-    fns = find_images(snapshotdir)
-    return get_imagemetadata(fns)</code></pre>
+    fns = find_images(snapshotdir, ext)
+    return get_imagemetadata(fns, delimiter)</code></pre>
+</details>
+</dd>
+<dt id="cppcpyutils.io.parse_filename"><code class="name flex">
+<span>def <span class="ident">parse_filename</span></span>(<span>filename, delimiter, regex)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Parse the input filename and return a list of metadata.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong></dt>
+<dd>Filename to parse metadata from</dd>
+<dt><strong><code>delimiter</code></strong></dt>
+<dd>Delimiter character to split the filename on</dd>
+<dt><strong><code>regex</code></strong></dt>
+<dd>
+<p>Compiled regular expression pattern to process file with</p>
+</dd>
+</dl>
+<p>:param filename: str
+:param delimiter: str
+:param regex: re.Pattern
+:return metadata: list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse_filename(filename, delimiter, regex):
+    &#34;&#34;&#34;Parse the input filename and return a list of metadata.
+
+    Args:
+        filename:   Filename to parse metadata from
+        delimiter:  Delimiter character to split the filename on
+        regex:      Compiled regular expression pattern to process file with
+
+    :param filename: str
+    :param delimiter: str
+    :param regex: re.Pattern
+    :return metadata: list
+    &#34;&#34;&#34;
+
+    # Split the filename on delimiter if it is a single character
+    if len(delimiter) == 1:
+        metadata = filename.split(delimiter)
+    else:
+        metadata = re.search(regex, filename)
+        if metadata is not None:
+            metadata = list(metadata.groups())
+        else:
+            metadata = []
+    return metadata</code></pre>
 </details>
 </dd>
 </dl>
@@ -350,15 +461,14 @@ camera label for backwards compatibility (no longer used)</p>
 <li><code><a title="cppcpyutils.io.find_images" href="#cppcpyutils.io.find_images">find_images</a></code></li>
 <li><code><a title="cppcpyutils.io.get_imagemetadata" href="#cppcpyutils.io.get_imagemetadata">get_imagemetadata</a></code></li>
 <li><code><a title="cppcpyutils.io.import_snapshots" href="#cppcpyutils.io.import_snapshots">import_snapshots</a></code></li>
+<li><code><a title="cppcpyutils.io.parse_filename" href="#cppcpyutils.io.parse_filename">parse_filename</a></code></li>
 </ul>
 </li>
 </ul>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>
