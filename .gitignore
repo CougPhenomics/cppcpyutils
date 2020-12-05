@@ -1,4 +1,6 @@
 .history
+.R*
+.bash_history
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -49,3 +51,12 @@ coverage.xml
 *.pot
 .Rproj.user
 setup.txt
+
+# jupyter stuff
+.conda
+.local
+.jupyter
+.ipy*
+
+# R stuff
+.R*
