@@ -12,7 +12,7 @@ import numpy as np
 import cv2
 import datetime
 from tqdm import tqdm
-from pathlib import Path
+from json.decoder import JSONDecodeError
 
 
 def options():
@@ -73,18 +73,16 @@ def main():
     # Read user options
     args = options()
 
-    if Path(args.config).is_file():
-        # Read the database connetion configuration file
-        config = open(args.config, 'r')
+    try:
         # Load the JSON configuration data
-        db = json.load(config)
-    else:
+        db = json.loads(config)
+    except JSONDecodeError:
         try:
-            db = json.loads(args.config)
-        except:
-            print(
-                "A server config file was not found and the config isn't valid JSON."
-            )
+            # Read the database connetion configuration file
+            with open(config) as file:
+                db = json.load(file)
+        except FileNotFoundError:
+            raise RuntimeError("A server config file was not found and the config isn't valid JSON." )
 
     #Load the experiment number
     exp = args.exper

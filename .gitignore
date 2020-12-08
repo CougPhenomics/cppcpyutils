@@ -60,3 +60,6 @@ setup.txt
 
 # R stuff
 .R*
+
+# docs
+*.html
