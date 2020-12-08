@@ -75,11 +75,11 @@ def main():
 
     try:
         # Load the JSON configuration data
-        db = json.loads(config)
+        db = json.loads(args.config)
     except JSONDecodeError:
         try:
             # Read the database connetion configuration file
-            with open(config) as file:
+            with open(args.config) as file:
                 db = json.load(file)
         except FileNotFoundError:
             raise RuntimeError("A server config file was not found and the config isn't valid JSON." )
