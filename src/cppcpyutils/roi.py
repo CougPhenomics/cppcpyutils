@@ -123,6 +123,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
         # Add ROI number to output. Before roi_objects so result has NA if no object.
         pcv.outputs.add_observation(
+            sample='default',
             variable='roi',
             trait='roi',
             method='roi',
