@@ -189,7 +189,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
             # Analyze the shape of the current plant (always do this even if shape is False so you can get plant_area)
             img_shape = pcv.analyze_object(img, plant_object, plant_mask)
-            plant_area = pcv.outputs.observations['area']['value'] * cppc.pixelresolution**2
+            plant_area = pcv.outputs.observations['default']['area']['value'] * cppc.pixelresolution**2
             pcv.outputs.add_observation(
                 sample='default',
                 variable='plantarea',
