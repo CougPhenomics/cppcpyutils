@@ -138,6 +138,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
 
             print('\t!!! No object found in ROI', str(i))
             pcv.outputs.add_observation(
+                sample='default',
                 variable='plantarea',
                 trait='plant area in sq mm',
                 method='observations.area*pixelresolution^2',
@@ -160,6 +161,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
                 grnindex = cppc.utils.mean(img_gi, plant_mask)
                 grnindexstd = cppc.utils.std(img_gi, plant_mask)
                 pcv.outputs.add_observation(
+                    sample='default',
                     variable='greenness_index',
                     trait='mean normalized greenness index',
                     method='g/sum(b+g+r)',
@@ -169,6 +171,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
                     label='/1')
 
                 pcv.outputs.add_observation(
+                    sample='default',
                     variable='greenness_index_std',
                     trait='std normalized greenness index',
                     method='g/sum(b+g+r)',
@@ -187,6 +190,7 @@ def iterate_rois(img, c, h, rc, rh, args, masked=True, gi=False, shape=False, hi
             img_shape = pcv.analyze_object(img, plant_object, plant_mask)
             plant_area = pcv.outputs.observations['area']['value'] * cppc.pixelresolution**2
             pcv.outputs.add_observation(
+                sample='default',
                 variable='plantarea',
                 trait='plant area in sq mm',
                 method='observations.area*pixelresolution^2',
