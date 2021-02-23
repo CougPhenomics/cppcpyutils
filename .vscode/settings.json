@@ -1,5 +1,22 @@
 {
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "python.pythonPath": "C:\\Users\\dominikschneider\\Miniconda3\\envs\\plantcv\\python.exe"
+    "python.pythonPath": "C:\\Users\\dominikschneider\\Miniconda3\\envs\\plantcv\\python.exe",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#fc8773",
+        "activityBar.activeBorder": "#c1feca",
+        "activityBar.background": "#fc8773",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#c1feca",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#fb5c41",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#fa310f",
+        "titleBar.activeBackground": "#fb5c41",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#fb5c4199",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#fb5c41"
 }
