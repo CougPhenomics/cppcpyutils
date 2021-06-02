@@ -49,7 +49,7 @@ def options():
     parser.add_argument(
         "-z",
         "--date2",
-        help="Date for end of data series (YYYY-mm-dd) (exclusive).",
+        help="Date for end of data series (YYYY-mm-dd) (inclusive).",
         required=False)
     parser.add_argument("-d",
                         "--append",
@@ -176,7 +176,7 @@ def main():
         "INNER JOIN image_file_table ON image_file_table.id = tile.raw_image_oid "
         "WHERE measurement_label = %(exp)s AND "
         "time_stamp >= %(date_start)s AND "
-        "time_stamp < %(date_end)s AND "
+        "time_stamp <= %(date_end)s AND "
         "camera_label ILIKE %(camera_label)s AND "
         "frame IN %(frameid)s ", data)
 
