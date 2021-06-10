@@ -6,7 +6,10 @@ from datetime import timedelta
 import pandas as pd
 
 
-def import_snapshots(snapshotdir, camera='psII', ext='png', delimiter='-'):
+def import_snapshots(snapshotdir, camera='psII', ext='png', delimiter='-', 
+                     metadata_columns=['plantbarcode', 'experiment', 'timestamp',
+                            'cameralabel', 'frameid', 'filename'],
+                     timestamp_format = "%Y%m%dT%H%M%S"):
     """Import snapshots from PSII imaging
 
     Parameter
@@ -19,6 +22,11 @@ def import_snapshots(snapshotdir, camera='psII', ext='png', delimiter='-'):
         extension of image files
     delimiter : str
         either single character delimiter or a regex string
+    metadata_columns : list
+        list of columns names to match the filename metadata
+    timestamp_format : str
+        format string for timestamp
+
 
     Returns
     -------
@@ -31,7 +39,7 @@ def import_snapshots(snapshotdir, camera='psII', ext='png', delimiter='-'):
     """
 
     fns = find_images(snapshotdir, ext)
-    return get_imagemetadata(fns, delimiter)
+    return get_imagemetadata(fns, delimiter, metadata_columns, timestamp_format)
 
 
 def find_images(snapshotdir, ext):
@@ -68,7 +76,7 @@ def find_images(snapshotdir, ext):
     return(fns)
 
 
-def get_imagemetadata(fns, delimiter):
+def get_imagemetadata(fns, delimiter, metadata_columns, timestamp_format):
     """Get image filenames and metadata from filenames
     Parameters
     ----------
@@ -76,6 +84,10 @@ def get_imagemetadata(fns, delimiter):
             filenames of image files
         delimiter : str
             single character or regex to split filename
+        metadata_columns : list
+            list of columns names to match the filename metadata
+        timestamp_format : str
+            format string for timestamp
 
 
     Returns
@@ -102,15 +114,12 @@ def get_imagemetadata(fns, delimiter):
 
     try:
         fdf = pd.DataFrame(flist,
-                        columns=[
-                            'plantbarcode', 'experiment', 'timestamp',
-                            'cameralabel', 'frameid', 'filename'
-                        ])
+                        columns=metadata_columns)
     except ValueError as e:
         raise ValueError('The filenames did have correctly formated metadata as specified by delimiter argument.') from e
 
     # convert date and time columns to datetime format
-    fdf['datetime'] = pd.to_datetime(fdf['timestamp'])
+    fdf['datetime'] = pd.to_datetime(fdf['timestamp'], format = timestamp_format)
     fdf['jobdate'] = fdf.datetime.dt.floor('d')
 
     #create a jobdate to match dark and light measurements. dark experiments after 8PM correspond to the next day's light experiments
