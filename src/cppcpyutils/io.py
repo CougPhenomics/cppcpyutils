@@ -6,10 +6,12 @@ from datetime import timedelta
 import pandas as pd
 
 
-def import_snapshots(snapshotdir, camera='psII', ext='png', delimiter='-', 
-                     metadata_columns=['plantbarcode', 'experiment', 'timestamp',
-                            'cameralabel', 'frameid', 'filename'],
-                     timestamp_format = "%Y%m%dT%H%M%S"):
+def import_snapshots(snapshotdir, 
+                     camera='psII', 
+                     ext='png', 
+                     delimiter='-', 
+                     metadata_columns=['plantbarcode', 'experiment', 'timestamp', 'cameralabel', 'frameid', 'filename'],
+                     timestamp_format="%Y%m%dT%H%M%S"):
     """Import snapshots from PSII imaging
 
     Parameter
@@ -111,7 +113,7 @@ def get_imagemetadata(fns, delimiter, metadata_columns, timestamp_format):
         f = parse_filename(fn[0], delimiter, regex) #if delimiter is a single character it will split filenam with delimiter otherwise uses regex
         f.append(fullfn)
         flist.append(f)
-
+        
     try:
         fdf = pd.DataFrame(flist,
                         columns=metadata_columns)
@@ -119,16 +121,15 @@ def get_imagemetadata(fns, delimiter, metadata_columns, timestamp_format):
         raise ValueError('The filenames did have correctly formated metadata as specified by delimiter argument.') from e
 
     # convert date and time columns to datetime format
-    fdf['datetime'] = pd.to_datetime(fdf['timestamp'], format = timestamp_format)
+    fdf['datetime'] = pd.to_datetime(fdf['timestamp'], format=timestamp_format)
     fdf['jobdate'] = fdf.datetime.dt.floor('d')
 
     #create a jobdate to match dark and light measurements. dark experiments after 8PM correspond to the next day's light experiments
     fdf.loc[fdf.datetime.dt.hour >= 20,
-            'jobdate'] = fdf.loc[fdf.datetime.dt.hour >= 20,
-                                    'jobdate'] + timedelta(days=1)
+            'jobdate'] = fdf.loc[fdf.datetime.dt.hour >= 20, 'jobdate'] + timedelta(days=1)
 
     # convert image id from string to integer that can be sorted numerically
-    fdf['frameid'] = fdf.frameid.astype('uint8')
+    fdf['frameid'] = fdf.frameid.str.split('_').str[0].astype('uint8')
     fdf = fdf.sort_values(['plantbarcode', 'datetime', 'frameid'])
 
     fdf = fdf.set_index(['plantbarcode', 'experiment', 'datetime',
