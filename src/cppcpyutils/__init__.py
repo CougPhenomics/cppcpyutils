@@ -1,5 +1,5 @@
 """utilities for common tasks in plantcv pipelines"""
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 
 from cppcpyutils import LT_db_extractor
 from cppcpyutils import compute
